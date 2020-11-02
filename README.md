@@ -43,6 +43,10 @@ De primera instancia se procedió a descargar el dataset [wine](https://archive.
     # también se aislan los atributos
     X = wines.drop('CLASS', axis='columns')
 ```
+A continuación se puede observar el ```DataFrame``` generado:
+
+![](/images/X.png)
+
 ## Analizando los datos
 Una vez extraido y preparado el dataset (vease test.py) se calculó la matriz de correlación:
 
@@ -108,13 +112,11 @@ Mediante la función ```retreive_dataset``` cargamos el dataset original y despu
 
 ![](/images/stratified-split-histogram.png)
 
-Una vez realizado el split definimos nuestro pipeline donde primero agregaremos las características propuestas y nomalizaremos los datos con un _standar scaler_. De esta forma pasamos a tener un dataset con la forma:
-
-![](/images/X.png)
-
-A un dataset preprocesado con las características aumentadas y escalado:
+Una vez realizado el split definimos nuestro pipeline donde primero agregaremos las características propuestas:
 
 ![](/images/Z.png)
+
+después nomalizaremos los datos mediante un _standar scaler_, teniendo al final del _pipeline_ un dataset preprocesado con las características aumentadas y escalado.
 
 ## Aplicando algoritmos de clasificación
 
