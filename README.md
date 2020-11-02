@@ -63,6 +63,39 @@ presentes en los vinos analizados. A su vez, existe una relación inversa entre 
 * el ácido málico
 * los fenoles no flavonoides
 
+## Preparando _pipeline_
+
+Una vez analizado el dataset y haber identificado correlaciones entre las características, se procede a construir un pipeline que realice el preprocesamiento.
+
+```Python
+        # generando el dataset a partir de los datos descargados
+        X, y = retreive_dataset()
+        # separación del dataset en train y test
+        X_train, X_test, y_train, y_test = stratified_split(
+            X, y, test_size=0.2)
+        # definimos un pipeline para el preprocesamiento
+        pipe = Pipeline([
+            ('appending_attributes', Appending_Attributes()),
+            ('scale', StandardScaler()),
+        ])
+        # aplicamos el pipeline para ambas particiones del dataset
+        X_train = pipe.fit_transform(X_train)
+        X_test = pipe.transform(X_test)
+        # datos listos para ser implementados en un modelo
+        foo(X_train, X_test, y_train, y_test)
+```
+Mediante la función ```retreive_dataset``` cargamos el dataset original y después realizamos un _stratified split_ para separar nuestros datos en entrenamiento y prueba, a una relación 80%-20% respectivamente.
+
+![](/images/stratified-split-histogram.png)
+
+Una vez realizado el split definimos nuestro pipeline donde primero agregaremos las características propuestas y nomalizaremos los datos con un _standar scaler_. De esta forma pasamos a tener un dataset con la forma:
+
+![](/images/X.png)
+
+A un dataset preprocesado con las características aumentadas y escalado:
+
+![](/images/Z.png)
+
 ## Referencias
 Blake, C.L. and Merz, C.J. (1998), UCI Repository of machine learning databases, http://www.ics.uci.edu/~mlearn/MLRepository.html. Irvine, CA: University of California, Department of Information and Computer Science.
 
