@@ -58,7 +58,7 @@ if __name__ == "__main__":
     plt.suptitle("Attribute correlations", fontsize=12)
     plt.show()
 
-    # print(corr_matrix['A7'].sort_values(ascending=False))
+    print(corr_matrix['A7'].sort_values(ascending=False))
     # A7   1.000000
     # A6   0.864564
     # A12  0.787194

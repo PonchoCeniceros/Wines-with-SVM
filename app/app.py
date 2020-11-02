@@ -41,7 +41,7 @@ def MLP_model(X_train, X_test, y_train, y_test):
 
 
 if __name__ == "__main__":
-    # SVM_model()
+    SVM_model()
     # Fitting 10 folds for each of 12 candidates, totalling 120 fits
     # [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
     # [Parallel(n_jobs=1)]: Done 120 out of 120 | elapsed:    0.2s finished

@@ -50,7 +50,23 @@ Una vez extraido y preparado el dataset (vease test.py) se calculó la matriz de
 
 en la cual se puede observar que existen correlaciones entre ciertos datos, lo cual nos puede ser de interés a la hora de llevar nuesto dataset a un algoritmo de clasificación. Corroboramos numéricamente algunas de estas correlaciones:
 
-![](/images/correlations-w-A7.png)
+```Python
+    print(corr_matrix['A7'].sort_values(ascending=False))
+    # A7   1.000000
+    # A6   0.864564
+    # A12  0.787194
+    # A9   0.652692
+    # A11  0.543479
+    # A13  0.494193
+    # A1   0.236815
+    # A5   0.195784
+    # A3   0.115077
+    # A10 -0.172379
+    # A4  -0.351370
+    # A2  -0.411007
+    # A8  -0.537900
+    # Name: A7, dtype: float64
+```
 
 y de igual forma de manera gráfica:
 
@@ -67,7 +83,7 @@ presentes en los vinos analizados. A su vez, existe una relación inversa entre 
 * el ácido málico
 * los fenoles no flavonoides
 
-## Preparando _pipeline_
+## Preparando el _pipeline_
 
 Una vez analizado el dataset y haber identificado correlaciones entre las características, se procede a construir un pipeline que realice el preprocesamiento.
 
@@ -99,6 +115,37 @@ Una vez realizado el split definimos nuestro pipeline donde primero agregaremos 
 A un dataset preprocesado con las características aumentadas y escalado:
 
 ![](/images/Z.png)
+
+## Aplicando algoritmos de clasificación
+
+Ya preprocesados los datos, se procede a implementar dos algoritmos de clasificación, a saber: un __Support Vector Machine SVM__ y un __Multilayer Perceptron MLP__, ambos  algoritmos que tomarán una copia de los datos de entrenamiento y generarán una clasificación para los datos de prueba. Cada implementación hará uso de un _cross validation_, el cual dividirá el set de entrenamiento en particiones que servirán para entrenar de mejor forma al modelo, y un _grid search_ para buscar, de una serie de parámetros requeridos para cada algoritmo, la configuración de los mismos que den como resultado un mejor entrenamiento:
+
+### SVM
+
+```Python
+    # generamos un SVC con gridsearch para la selección de hyperparámetros
+    # y un cross validation que dividirá en 10 secciones nuestra partición
+    # de entrenamiento, tomando cada una como una partición de validación
+    model = GridSearchCV(SVC(), [
+        {'C': [1, 10, 100, 1000], 'kernel': ['linear']},
+        {'C': [1, 10, 100, 1000], 'gamma': [0.001, 0.0001], 'kernel': ['rbf']},
+    ], cv=10, verbose=1)
+    # entrenamos nuestro modelo y generamos una predicción
+    model.fit(X_train, y_train)
+    predictions = model.predict(X_test)
+```
+
+### MLP
+
+```Python
+    # generamos un MLP con gridsearch para la selección de hyperparámetros y un cross validation que dividirá
+    # en 10 secciones nuestra partición de entrenamiento, tomando cada una como una partición de validación
+    model = GridSearchCV(MLPClassifier(), {'solver': ['sgd', 'adam'], 'activation': ['logistic', 'tanh', 'relu'], 'max_iter': [
+                         2000, 5000, 10000], 'hidden_layer_sizes': (142, 20)}, cv=10, verbose=1)
+    model.fit(X_train, y_train)
+    predictions = model.predict(X_test)
+```
+
 
 ## Referencias
 Blake, C.L. and Merz, C.J. (1998), UCI Repository of machine learning databases, http://www.ics.uci.edu/~mlearn/MLRepository.html. Irvine, CA: University of California, Department of Information and Computer Science.
