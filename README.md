@@ -48,11 +48,15 @@ Una vez extraido y preparado el dataset (vease test.py) se calculó la matriz de
 
 ![](/images/attribute-correlations.png)
 
-en la cual se puede observar que, tal y como se muestra en las siguientes gráficas
+en la cual se puede observar que existen correlaciones entre ciertos datos, lo cual nos puede ser de interés a la hora de llevar nuesto dataset a un algoritmo de clasificación. Corroboramos numéricamente algunas de estas correlaciones:
+
+![](/images/correlations-w-A7.png)
+
+y de igual forma de manera gráfica:
 
 ![](/images/correlations.png)
 
-existe una relación directa entre la cantidad de flavonoides y:
+podemos afirmar que existe una relación directa entre la cantidad de flavonoides y:
 * los fenoles totales
 * la concentración de proteínas
 * las proantocianinas
