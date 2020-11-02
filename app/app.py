@@ -41,36 +41,8 @@ def MLP_model(X_train, X_test, y_train, y_test):
 
 
 if __name__ == "__main__":
+    # ejecutando algoritmo SVM
     SVM_model()
-    # Fitting 10 folds for each of 12 candidates, totalling 120 fits
-    # [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    # [Parallel(n_jobs=1)]: Done 120 out of 120 | elapsed:    0.2s finished
-    # Best C: 10
-    # Best Kernel: rbf
-    # Best Gamma: 0.001
-    #               precision    recall  f1-score   support
-
-    #            1       1.00      1.00      1.00        12
-    #            2       1.00      1.00      1.00        14
-    #            3       1.00      1.00      1.00        10
-
-    #     accuracy                           1.00        36
-    #    macro avg       1.00      1.00      1.00        36
-    # weighted avg       1.00      1.00      1.00        36
-
+    # ejecutando algoritmo MLP
     MLP_model()
-    # Fitting 10 folds for each of 36 candidates, totalling 360 fits
-    # [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    # [Parallel(n_jobs=1)]: Done 360 out of 360 | elapsed:  3.3min finished
-    # Best solver: sgd
-    # Best activation: logistic
-    # Best max_iter: 2000
-    #               precision    recall  f1-score   support
 
-    #            1       0.92      1.00      0.96        12
-    #            2       0.93      0.93      0.93        14
-    #            3       1.00      0.90      0.95        10
-
-    #     accuracy                           0.94        36
-    #    macro avg       0.95      0.94      0.95        36
-    # weighted avg       0.95      0.94      0.94        36
